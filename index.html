@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Little Corner of the Web 💖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rose: { 50: '#fff1f2', 100: '#ffe4e6', 200: '#fecdd3', 400: '#fb7185', 500: '#f43f5e' },
+                        cream: '#fdfbf7',
+                        gold: '#d4af37'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-cream text-stone-700 min-h-screen pb-24 relative">
+
+    <div id="lockModal" class="fixed inset-0 bg-rose-100/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div id="lockCard" class="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full text-center border border-rose-200">
+            <div class="text-5xl mb-4">🔒</div>
+            <h2 class="text-2xl font-bold text-stone-800 mb-2">Welcome, My Sweetupie</h2>
+            <p class="text-stone-600 mb-6 text-sm">To enter our special corner, answer our secret passcode question:</p>
+            <p class="font-semibold text-rose-500 mb-4">What's our Special datee babuu (4 numbers password)</p>
+            
+            <form id="lockForm" onsubmit="unlockSite(event)">
+                <input type="password" id="passcodeInput" placeholder="Enter secret passcode..." class="w-full px-4 py-3 rounded-xl border border-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-400 text-center mb-4">
+                <button type="submit" class="w-full py-3 bg-rose-400 hover:bg-rose-500 text-white font-semibold rounded-xl shadow-md transition-all">Unlock Our Corner ✨</button>
+            </form>
+            <p id="lockError" class="text-xs text-red-500 mt-3 hidden">Oops! That's not right, try again darling! 💖</p>
+        </div>
+    </div>
+
+    <main id="mainContent" class="hidden">
+
+        <button onclick="triggerEasterEgg('star')" class="fixed top-6 right-6 text-2xl z-40 animate-pulse hover:scale-125 transition-transform" title="Click me!">⭐</button>
+        <button onclick="triggerEasterEgg('clover')" class="fixed bottom-24 left-6 text-2xl z-40 animate-bounce hover:scale-125 transition-transform" title="A little luck!">🍀</button>
+
+        <section class="min-h-[80vh] flex flex-col justify-center items-center text-center p-6 relative bg-gradient-to-b from-rose-50 to-cream">
+            <h1 class="text-5xl md:text-7xl font-romantic text-rose-500 mb-4 animate-float">Happy Girlfriend's Day, My Love 💖</h1>
+            <p class="text-lg md:text-xl text-stone-600 max-w-xl mb-8">Welcome to your digital keepsake—a small place created just for you to celebrate.</p>
+            
+            <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-rose-100 mb-8 max-w-lg w-full">
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-4">We Have Been Together For</h3>
+                <div class="grid grid-cols-4 gap-2 text-rose-500">
+                    <div class="p-2 bg-rose-50 rounded-lg"><span id="days" class="text-2xl md:text-3xl font-bold">00</span><p class="text-xs text-stone-500">Days</p></div>
+                    <div class="p-2 bg-rose-50 rounded-lg"><span id="hours" class="text-2xl md:text-3xl font-bold">00</span><p class="text-xs text-stone-500">Hours</p></div>
+                    <div class="p-2 bg-rose-50 rounded-lg"><span id="minutes" class="text-2xl md:text-3xl font-bold">00</span><p class="text-xs text-stone-500">Mins</p></div>
+                    <div class="p-2 bg-rose-50 rounded-lg"><span id="seconds" class="text-2xl md:text-3xl font-bold">00</span><p class="text-xs text-stone-500">Secs</p></div>
+                </div>
+            </div>
+
+            <div class="bg-rose-100/60 p-4 rounded-full flex items-center space-x-4 border border-rose-200">
+                <button id="playAudioBtn" onclick="toggleAudio()" class="w-12 h-12 bg-rose-400 hover:bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md">▶</button>
+                <div class="text-left pr-4">
+                    <p class="text-xs font-semibold text-rose-600">A Voice Message For You</p>
+                    <p class="text-xs text-stone-500">Click play to listen 🎧</p>
+                </div>
+                <audio id="welcomeAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+            </div>
+        </section>
+
+        <div class="max-w-4xl mx-auto px-4 space-y-20 py-12">
+
+            <section>
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-stone-800">✉️ "Open When..." Letters</h2>
+                    <p class="text-stone-500 text-sm mt-1">Click a letter whenever you need a message from my heart.</p>
+                </div>
+                <div id="envelopeGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    </div>
+            </section>
+
+            <section class="text-center">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-stone-800">💖 52 Things I Love About You</h2>
+                    <p class="text-stone-500 text-sm mt-1">Draw a card to reveal a reason why you mean the world to me.</p>
+                </div>
+                
+                <div class="perspective-1000 max-w-sm mx-auto h-64 mb-6">
+                    <div id="loveCard" onclick="flipCard()" class="transform-style-3d relative w-full h-full bg-white rounded-2xl shadow-xl border-2 border-rose-200 cursor-pointer flex items-center justify-center p-6">
+                        <div class="backface-hidden absolute inset-0 flex flex-col items-center justify-center bg-rose-50 rounded-2xl p-6">
+                            <span class="text-4xl mb-2">💌</span>
+                            <p class="text-rose-400 font-medium text-sm">Tap card to flip!</p>
+                        </div>
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 flex flex-col items-center justify-center bg-white rounded-2xl p-6 border-2 border-rose-300">
+                            <span id="cardNum" class="text-xs text-rose-400 font-bold uppercase tracking-wider mb-2">Reason #1</span>
+                            <p id="cardReason" class="font-handwritten text-2xl text-stone-700">Loading reason...</p>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="drawRandomReason()" class="px-6 py-2.5 bg-rose-400 hover:bg-rose-500 text-white rounded-full font-medium shadow-md transition-all">🔀 Draw Another Reason</button>
+            </section>
+
+            <section class="bg-rose-50/50 p-8 rounded-3xl border border-rose-100">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-stone-800">🗺️ Our Future Date Bucket List</h2>
+                    <p class="text-stone-500 text-sm mt-1">Check off our completed adventures or claim our next one!</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-2 mb-6" id="categoryFilters">
+                    <button onclick="filterBucketList('All')" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-rose-400 text-white">All</button>
+                    <button onclick="filterBucketList('Cozy Nights In')" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-stone-600 border border-stone-200">Cozy Nights</button>
+                    <button onclick="filterBucketList('Travel Adventures')" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-stone-600 border border-stone-200">Travel</button>
+                    <button onclick="filterBucketList('Foodie Dates')" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-stone-600 border border-stone-200">Foodie</button>
+                </div>
+
+                <div id="bucketList" class="space-y-3 max-w-xl mx-auto">
+                    </div>
+            </section>
+
+            <section>
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-stone-800">🎵 Our Soundtrack</h2>
+                    <p class="text-stone-500 text-sm mt-1">Songs that tell our story and always make me think of you.</p>
+                </div>
+                <div id="soundtrackList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    </div>
+            </section>
+
+            <section>
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-stone-800">📸 Our Journey Together</h2>
+                    <p class="text-stone-500 text-sm mt-1">Tap a polaroid frame to reveal our memories.</p>
+                </div>
+                <div id="timelineContainer" class="relative border-l-2 border-rose-200 ml-4 md:ml-32 space-y-12">
+                    </div>
+            </section>
+
+            <section class="text-center bg-white p-8 rounded-3xl shadow-lg border border-rose-100 max-w-lg mx-auto">
+                <h2 class="text-2xl font-bold text-stone-800 mb-2">🎰 What Should We Do Today?</h2>
+                <p class="text-stone-500 text-sm mb-6">Can't decide? Let our date wheel make the choice!</p>
+                <div id="dateWheelResult" class="p-6 bg-rose-50 rounded-2xl mb-6 min-h-[100px] flex flex-col items-center justify-center border border-rose-200">
+                    <p class="text-stone-400 text-sm">Click spin below!</p>
+                </div>
+                <button onclick="spinDateWheel()" class="px-8 py-3 bg-rose-400 hover:bg-rose-500 text-white rounded-full font-bold shadow-lg transition-transform active:scale-95">🎰 Spin For A Date</button>
+            </section>
+
+        </div>
+
+        <footer class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-rose-100 p-4 z-30">
+            <div class="max-w-md mx-auto flex items-center justify-between">
+                <div class="text-left">
+                    <p class="text-xs font-bold text-stone-700">Missing me right now?</p>
+                    <p class="text-[10px] text-stone-400">Send an instant alert straight to my phone</p>
+                </div>
+                <button onclick="sendKiss()" class="animate-pulse-glow px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-full font-bold text-sm flex items-center space-x-2 shadow-md">
+                    <span>Send Him a Kiss</span>
+                    <span>😘</span>
+                </button>
+            </div>
+        </footer>
+
+        <div id="letterModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-white max-w-lg w-full rounded-2xl p-6 relative shadow-2xl overflow-hidden border-2 border-rose-200">
+                <button onclick="closeModal('letterModal')" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 text-xl font-bold">✕</button>
+                <h3 id="modalTitle" class="text-2xl font-bold text-stone-800 mb-4">Letter Title</h3>
+                <img id="modalImg" src="" alt="Memory" class="w-full h-48 object-cover rounded-xl mb-4 hidden">
+                <p id="modalBody" class="text-stone-600 font-handwritten text-2xl leading-relaxed mb-4">Letter body text...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
